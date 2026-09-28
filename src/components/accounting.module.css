@@ -1,0 +1,228 @@
+.page {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.shell {
+  width: min(100%, 720px);
+  min-height: calc(100vh - 48px);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 8px 28px rgb(34 53 71 / 8%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 24px 32px;
+  color: #ffffff;
+  background: var(--brand);
+}
+
+.header p,
+.header h1 {
+  margin: 0;
+}
+
+.header p {
+  margin-bottom: 6px;
+  color: #cdd7df;
+  font-size: 0.9rem;
+}
+
+.header h1 {
+  font-size: clamp(1.45rem, 3.5vw, 2rem);
+}
+
+.mode {
+  flex: 0 0 auto;
+  border: 1px solid rgb(255 255 255 / 35%);
+  border-radius: 999px;
+  padding: 7px 11px;
+  font-size: 0.78rem;
+  white-space: nowrap;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: 110px 135px 1fr auto;
+  gap: 8px;
+  padding: 28px 32px;
+  border-bottom: 1px solid var(--border);
+}
+
+.form input,
+.form select,
+.form button,
+.record button,
+.backButton {
+  min-height: 44px;
+  border: 1px solid #b9c0c7;
+  border-radius: 3px;
+  padding: 9px 12px;
+  color: var(--foreground);
+  background: #f3f4f5;
+}
+
+.form input,
+.form select {
+  min-width: 0;
+  background: #ffffff;
+}
+
+.form button,
+.record button {
+  cursor: pointer;
+}
+
+.form button:disabled,
+.record button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.form input:focus-visible,
+.form select:focus-visible,
+.form button:focus-visible,
+.record button:focus-visible,
+.backButton:focus-visible {
+  outline: 3px solid #6aa6d8;
+  outline-offset: 2px;
+}
+
+.validation {
+  grid-column: 1 / -1;
+  margin: 4px 0 0;
+  color: var(--expense);
+  font-size: 0.9rem;
+}
+
+.error {
+  margin: 18px 32px 0;
+  border-left: 4px solid var(--expense);
+  padding: 10px 12px;
+  color: #7e241d;
+  background: #fff2f0;
+}
+
+.list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 22px 32px 10px;
+  list-style: none;
+}
+
+.record {
+  display: grid;
+  grid-template-columns: 110px 1fr auto;
+  align-items: center;
+  gap: 16px;
+  min-height: 56px;
+  border-bottom: 1px solid #edf0f2;
+  padding-bottom: 12px;
+}
+
+.record button {
+  min-height: 40px;
+  padding-inline: 14px;
+}
+
+.income,
+.expense {
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.income {
+  color: var(--income);
+}
+
+.expense {
+  color: var(--expense);
+}
+
+.description {
+  overflow-wrap: anywhere;
+}
+
+.empty {
+  margin: 32px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.summary {
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+  margin: 42px 32px 28px;
+  font-size: 1.25rem;
+}
+
+.summary small {
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+.backButton {
+  display: block;
+  width: fit-content;
+  margin: 0 auto 60px;
+  text-decoration: none;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  clip-path: inset(50%);
+}
+
+@media (max-width: 680px) {
+  .page {
+    padding: 0;
+  }
+
+  .shell {
+    min-height: 100vh;
+    border: 0;
+  }
+
+  .header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 22px 20px;
+  }
+
+  .form {
+    grid-template-columns: 1fr 1fr;
+    padding: 22px 20px;
+  }
+
+  .form input:nth-of-type(2),
+  .form button {
+    grid-column: 1 / -1;
+  }
+
+  .list {
+    padding-inline: 20px;
+  }
+
+  .record {
+    grid-template-columns: 90px 1fr auto;
+    gap: 10px;
+  }
+
+  .record button {
+    min-height: 38px;
+    padding: 7px 10px;
+  }
+}

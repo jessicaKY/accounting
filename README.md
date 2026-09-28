@@ -1,34 +1,59 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Accounting 記帳小工具
 
-## Getting Started
+使用 TypeScript、React、React Hooks、Next.js App Router 與 Firebase 製作的記帳練習專案。
 
-First, run the development server:
+## 功能
+
+- `/`：首頁與前往記帳頁面的入口
+- `/accounting`：新增收入或支出、刪除記錄、自動計算小計
+- Firebase Authentication：使用匿名登入建立個人資料範圍
+- Cloud Firestore：儲存每一筆記帳記錄
+- Realtime Database：同步筆數、餘額與更新時間摘要
+- 未設定 Firebase 時使用 localStorage 示範模式
+
+## 技術
+
+- Node.js、npm
+- TypeScript
+- React、React Hooks
+- Next.js App Router
+- Firebase Web SDK、Firebase CLI
+
+## 本機啟動
 
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+開啟 http://localhost:3000 。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Firebase 設定
 
-## Learn More
+1. 在 Firebase Console 建立專案並註冊 Web App。
+2. 啟用 Authentication 的 Anonymous 登入方式。
+3. 建立 Cloud Firestore 資料庫。
+4. 建立 Realtime Database。
+5. 把 Firebase Web App 設定填入 `.env.local`。
+6. 登入 Firebase CLI 後部署安全規則：
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+firebase login
+firebase use --add
+firebase deploy --only firestore:rules,database
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+同一組 `NEXT_PUBLIC_FIREBASE_*` 環境變數也需要設定在 Vercel。
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 專案結構
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+src/app/                 Next.js 路由與頁面
+src/components/          React 表單、清單與主畫面元件
+src/hooks/               React Hooks 與狀態管理
+src/lib/                 Firebase 初始化與資料存取
+src/types/               TypeScript 型別
+firestore.rules          Firestore 安全規則
+database.rules.json      Realtime Database 安全規則
+```

@@ -1,0 +1,44 @@
+:root {
+  --background: #f6f8fa;
+  --foreground: #273442;
+  --panel: #ffffff;
+  --border: #d8dde3;
+  --brand: #223547;
+  --brand-soft: #cfe0f0;
+  --income: #27831f;
+  --expense: #a12d25;
+  --muted: #66717d;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--background);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  color: var(--foreground);
+  background: var(--background);
+  font-family:
+    Arial, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+}
+
+button,
+input,
+select {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: inherit;
+}
