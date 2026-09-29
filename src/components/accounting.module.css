@@ -280,6 +280,11 @@
   .shell {
     min-height: 100vh;
     border: 0;
+    padding-bottom: 60px;
+  }
+
+  .backButton {
+    margin-bottom: 0;
   }
 
   .header {
