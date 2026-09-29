@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 import type { NewAccountingRecord, RecordKind } from "@/types/accounting";
 
@@ -13,9 +13,27 @@ interface AccountingFormProps {
 
 export function AccountingForm({ busy, onAdd }: AccountingFormProps) {
   const [kind, setKind] = useState<RecordKind>("income");
+  const [kindMenuOpen, setKindMenuOpen] = useState(false);
   const [amount, setAmount] = useState("");
   const [description, setDescription] = useState("");
   const [validationMessage, setValidationMessage] = useState("");
+  const kindPickerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function closeKindMenu(event: PointerEvent) {
+      if (!kindPickerRef.current?.contains(event.target as Node)) {
+        setKindMenuOpen(false);
+      }
+    }
+
+    document.addEventListener("pointerdown", closeKindMenu);
+    return () => document.removeEventListener("pointerdown", closeKindMenu);
+  }, []);
+
+  function chooseKind(nextKind: RecordKind) {
+    setKind(nextKind);
+    setKindMenuOpen(false);
+  }
 
   async function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -39,17 +57,57 @@ export function AccountingForm({ busy, onAdd }: AccountingFormProps) {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit}>
-      <label className={styles.srOnly} htmlFor="record-kind">
-        收支類型
-      </label>
-      <select
-        id="record-kind"
-        value={kind}
-        onChange={(event) => setKind(event.target.value as RecordKind)}
-      >
-        <option value="income">收入</option>
-        <option value="expense">支出</option>
-      </select>
+      <div className={styles.kindPicker} ref={kindPickerRef}>
+        <button
+          aria-controls="record-kind-options"
+          aria-expanded={kindMenuOpen}
+          aria-haspopup="listbox"
+          aria-label="收支類型"
+          className={styles.kindTrigger}
+          onClick={() => setKindMenuOpen((open) => !open)}
+          onKeyDown={(event) => {
+            if (event.key === "Escape") setKindMenuOpen(false);
+            if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+              event.preventDefault();
+              setKindMenuOpen(true);
+            }
+          }}
+          type="button"
+        >
+          <span>{kind === "income" ? "收入" : "支出"}</span>
+          <span aria-hidden="true" className={styles.kindArrow} />
+        </button>
+
+        {kindMenuOpen ? (
+          <div
+            aria-label="收支類型選項"
+            className={styles.kindMenu}
+            id="record-kind-options"
+            role="listbox"
+          >
+            <button
+              aria-selected={kind === "income"}
+              className={styles.kindOption}
+              data-selected={kind === "income"}
+              onClick={() => chooseKind("income")}
+              role="option"
+              type="button"
+            >
+              收入
+            </button>
+            <button
+              aria-selected={kind === "expense"}
+              className={styles.kindOption}
+              data-selected={kind === "expense"}
+              onClick={() => chooseKind("expense")}
+              role="option"
+              type="button"
+            >
+              支出
+            </button>
+          </div>
+        ) : null}
+      </div>
 
       <label className={styles.srOnly} htmlFor="record-amount">
         金額
