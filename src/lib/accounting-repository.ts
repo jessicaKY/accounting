@@ -1,4 +1,3 @@
-import { signInAnonymously, type User } from "firebase/auth";
 import { onValue, ref, set } from "firebase/database";
 import {
   addDoc,
@@ -46,13 +45,6 @@ async function writeSummary(
   };
 
   await set(ref(services.realtimeDatabase, summaryPath(userId)), summary);
-}
-
-export async function ensureAnonymousUser(
-  services: FirebaseServices,
-): Promise<User> {
-  if (services.auth.currentUser) return services.auth.currentUser;
-  return (await signInAnonymously(services.auth)).user;
 }
 
 export function subscribeToRecords(

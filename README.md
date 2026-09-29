@@ -4,12 +4,13 @@
 
 ## 功能
 
-- `/`：首頁與前往記帳頁面的入口
+- `/`：首頁與前往登入頁面的入口
+- `/login`：Email／密碼註冊、登入與登出
 - `/accounting`：新增收入或支出、刪除記錄、自動計算小計
-- Firebase Authentication：使用匿名登入建立個人資料範圍
+- Firebase Authentication：使用 Email／密碼建立可跨裝置登入的帳戶
 - Cloud Firestore：儲存每一筆記帳記錄
 - Realtime Database：同步筆數、餘額與更新時間摘要
-- 未設定 Firebase 時使用 localStorage 示範模式
+- 未登入時禁止讀寫個人記帳資料
 
 ## 技術
 
@@ -32,7 +33,7 @@ npm run dev
 ## Firebase 設定
 
 1. 在 Firebase Console 建立專案並註冊 Web App。
-2. 啟用 Authentication 的 Anonymous 登入方式。
+2. 啟用 Authentication 的 Email/Password 登入方式。
 3. 建立 Cloud Firestore 資料庫。
 4. 建立 Realtime Database。
 5. 把 Firebase Web App 設定填入 `.env.local`。

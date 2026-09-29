@@ -15,7 +15,7 @@ export default function Home() {
         </div>
 
         <div className={styles.actionArea}>
-          <Link className={styles.startButton} href="/accounting">
+          <Link className={styles.startButton} href="/login">
             點此開始
           </Link>
         </div>

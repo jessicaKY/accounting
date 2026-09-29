@@ -1,0 +1,141 @@
+.page {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.shell {
+  width: min(100%, 1080px);
+  min-height: calc(100vh - 48px);
+  margin: 0 auto;
+  border: 1px solid var(--border);
+  background: var(--panel);
+  box-shadow: 0 8px 28px rgb(34 53 71 / 8%);
+}
+
+.header {
+  padding: 34px 24px;
+  color: #fff;
+  background: var(--brand);
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.content {
+  display: grid;
+  justify-items: center;
+  gap: 34px;
+  padding: 70px 24px;
+}
+
+.form {
+  display: grid;
+  width: min(100%, 420px);
+  gap: 14px;
+}
+
+.form h2 {
+  margin: 0 0 16px;
+  text-align: center;
+}
+
+.form label {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  align-items: center;
+  gap: 10px;
+}
+
+.form input,
+.form button,
+.button,
+.homeLink {
+  min-height: 44px;
+  border: 1px solid #b9c0c7;
+  border-radius: 3px;
+  padding: 9px 12px;
+  color: var(--foreground);
+  background: #f3f4f5;
+}
+
+.form input {
+  min-width: 0;
+  background: #fff;
+}
+
+.form button {
+  justify-self: center;
+  cursor: pointer;
+}
+
+.form button:disabled {
+  cursor: wait;
+  opacity: 0.55;
+}
+
+.signedIn {
+  display: grid;
+  justify-items: center;
+  gap: 14px;
+  text-align: center;
+}
+
+.signedIn p {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.button {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.error {
+  width: min(100%, 420px);
+  margin: -14px 0 0;
+  border-left: 4px solid var(--expense);
+  padding: 10px 12px;
+  color: #7e241d;
+  background: #fff2f0;
+}
+
+.homeLink {
+  margin-top: 8px;
+  cursor: pointer;
+}
+
+.form input:focus-visible,
+.form button:focus-visible,
+.button:focus-visible,
+.homeLink:focus-visible {
+  outline: 3px solid #6aa6d8;
+  outline-offset: 2px;
+}
+
+@media (max-width: 600px) {
+  .page {
+    padding: 0;
+  }
+
+  .shell {
+    min-height: 100vh;
+    border: 0;
+  }
+
+  .content {
+    padding: 46px 20px;
+  }
+
+  .form label {
+    grid-template-columns: 1fr;
+    gap: 6px;
+  }
+}

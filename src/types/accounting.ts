@@ -16,4 +16,4 @@ export interface AccountingSummary {
   updatedAt: number;
 }
 
-export type DataMode = "loading" | "firebase" | "local";
+export type DataMode = "loading" | "firebase" | "unconfigured";
